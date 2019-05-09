@@ -8,8 +8,8 @@ const Session = require("./Session"),
 
     subclasses = transactions.getAllSubClassInfo();
 
-    for (i = 0; i < subclasses.length; i++) {
-        console.log(subclasses[i].print())
-    }
+    subclasses.forEach(function (subclass) {
+        console.log(subclass.print());
+    })
 
 })();

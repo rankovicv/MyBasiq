@@ -1,5 +1,5 @@
 const Subclass = require("./Subclass"),
- converter = require("../helpers/converter");
+  converter = require("../helpers/converter");
 
 const TransactionList = function ({ data, links }) {
   this.data = converter.convertToTransaction(data);
@@ -10,20 +10,21 @@ const TransactionList = function ({ data, links }) {
   this.getAllSubClassInfo = function () {
     const list = [];
 
-    for (i = 0; i < self.data.length; i++) {
+    self.data.forEach(function (item) {
 
-      if (self.data[i].subClass) {
+      if (item.subClass) {
         var existingSubclass = list.find(function (e) {
-          return e.code === self.data[i].subClass.code
+          return e.code === item.subClass.code
         })
 
         if (!existingSubclass) {
-          list.push(new Subclass(self.data[i]))
+          list.push(new Subclass(item))
         } else {
-          existingSubclass.countSubclass(parseFloat(self.data[i].amount));
+          existingSubclass.countSubclass(parseFloat(item.amount));
         }
       }
-    }
+
+    })
 
     return list;
   };
